@@ -1,9 +1,12 @@
 const express = require('express');
-const routes = express.Router();
+const router = express.Router();
 let MovieCtrl = require('../controllers/movie.ctrl');
 
-routes.get('', MovieCtrl.get);
-routes.post('/create', MovieCtrl.create);
+router.get('', MovieCtrl.get);
+router.get('/:id', MovieCtrl.getId);
+router.post('/create', MovieCtrl.create);
+router.delete('/:id', MovieCtrl.delete);
+router.patch('/:id', MovieCtrl.update);
 
 
-module.exports = routes;
+module.exports = router;
