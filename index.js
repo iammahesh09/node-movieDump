@@ -1,14 +1,15 @@
-const http = require('http');
+const express = require('express');
+const app = express();
 
-const server = http.createServer(handleAnonymousFun)
+app.listen(8000, callbackFun);
+
+app.get('/', handleAnonymousFun)
+
+function callbackFun() {
+    console.log("Server is running on 8000")
+}
 
 function handleAnonymousFun(req, res) {
     res.write('Hello NodeJS');
     res.end();
-}
-
-server.listen(8000, callback)
-
-function callback() {
-    console.log("Server is running on 8000")
 }
