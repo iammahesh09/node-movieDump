@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
+const bodyParser = require('body-parser')
 
 const configMongo = require('./configMongoDB');
 
@@ -29,6 +30,8 @@ function handleAnonymousFun(req, res) {
     res.write('Hello NodeJS');
     res.end();
 }
+
+app.use(bodyParser.json());
 
 
 app.get('/', handleAnonymousFun);

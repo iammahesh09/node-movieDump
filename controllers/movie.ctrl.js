@@ -1,19 +1,23 @@
-const Movie = require('../models/movie.model')
+const movieSrc = require('../services/movie.service');
 
 const movieCtrl = {
 
-    getMovies: (req, res) => {
+    get: async (req, res) => {
+        try {
+            let movies = await movieSrc.getMovies();
+            res.status(200).json(movies)
+        } catch (err) {
+            res.status(500).send(err + "Internal Server Error");
+        }
+    },
 
-        Movie.find(function (error, movies) {
-
-            if (error) {
-                res.send("Internal Server Error");
-            } else {
-                res.status(200);
-                res.json(movies);
-            }
-
-        })
+    create: async (req, res) => {
+        try {
+            let saveMovie = await movieSrc.createMovie(req.body)
+            res.status(201).json(saveMovie)
+        } catch (err) {
+            res.status(500).send(err + "Internal Server Error");
+        }
     }
 
 }
