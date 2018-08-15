@@ -12,7 +12,8 @@ let movieCtrl = require('./controllers/movie.ctrl');
 let movieRouter = require('./routers/movie.router');
 
 //Node Server Connect
-app.listen(8000, callbackFun);
+let PORT = process.env.PORT || 8000
+app.listen(PORT, callbackFun);
 
 //MongoDB Connect
 mongoose.connect(configMongo.connectUrl, {
@@ -21,7 +22,7 @@ mongoose.connect(configMongo.connectUrl, {
 
 
 function callbackFun() {
-    console.log("Server is running on 8000");
+    console.log(`Hello! NodeJS, Server is running on port ${PORT}`);
 }
 
 function handleAnonymousFun(req, res) {
