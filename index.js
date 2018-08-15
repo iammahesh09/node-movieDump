@@ -1,5 +1,9 @@
 const express = require('express');
 const app = express();
+const mongoose = require('mongoose');
+
+const configMongo = require('./configMongoDB');
+
 
 //controllers
 let movieCtrl = require('./controllers/movie.ctrl');
@@ -7,8 +11,13 @@ let movieCtrl = require('./controllers/movie.ctrl');
 //Routers
 let movieRouter = require('./routers/movie.router');
 
-
+//Node Server Connect
 app.listen(8000, callbackFun);
+
+//MongoDB Connect
+mongoose.connect(configMongo.connectUrl, {
+    useNewUrlParser: true
+}, () => console.log("DB Conneted"));
 
 
 function callbackFun() {
