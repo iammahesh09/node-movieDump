@@ -1,5 +1,6 @@
 const express = require('express');
 const app = express();
+const cors = require('cors')
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser')
 
@@ -30,6 +31,8 @@ function handleAnonymousFun(req, res) {
     res.write('Hello NodeJS');
     res.end();
 }
+
+app.use(cors())
 
 app.use(bodyParser.json());
 

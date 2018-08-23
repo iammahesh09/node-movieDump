@@ -1,19 +1,25 @@
 const express = require('express');
+const multer = require('multer');
 const router = express.Router();
 let MovieCtrl = require('../controllers/movie.ctrl');
 
-const multer = require('multer');
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
         cb(null, "uploadData");
     },
     filename: function (req, file, cb) {
-        let filename = Date.now() + "-" + file.originalname;
-        req.body.Poster = filename;
-        cb(null, filename);
+
+        if (file.originalname.endsWith([".svg"])) {
+            cb("Svg file not allowed")
+        } else {
+            let filename = Date.now() + "-" + file.originalname;
+            req.body.Poster = filename;
+            cb(null, filename);
+        }
+
     }
 });
-var upload = multer({
+let upload = multer({
     storage: storage
 })
 
@@ -23,7 +29,7 @@ var upload = multer({
 
 router.get('', MovieCtrl.get);
 router.get('/:id', MovieCtrl.getId);
-router.post('/create', upload.single("Poster"), MovieCtrl.create);
+router.post('/', upload.single("Poster"), MovieCtrl.create);
 router.delete('/:id', MovieCtrl.delete);
 router.patch('/:id', MovieCtrl.update);
 
