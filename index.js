@@ -17,7 +17,8 @@ let movieCtrl = require('./controllers/movie.ctrl');
 
 //Routers
 let movieRouter = require('./routers/movie.router');
-
+//Review Router
+const reviewRouter = require('./routers/review.router');
 
 app.use(cors())
 
@@ -40,6 +41,11 @@ app.use(middleware.tokenAuth)
 
 //Private
 app.use('/api/movies', movieRouter);
+
+//Private
+app.use('/api/reviews', reviewRouter)
+
+
 
 //Connect Server
 let PORT = process.env.PORT || 8000
